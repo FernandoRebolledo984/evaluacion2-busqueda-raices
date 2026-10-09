@@ -9,3 +9,5 @@ if __name__ == "__main__":
 
     intervalo_a = 1.0
     intervalo_b = 2.0
+    tolerancia_exigida = 1e-6
+    max_iteraciones = 100
