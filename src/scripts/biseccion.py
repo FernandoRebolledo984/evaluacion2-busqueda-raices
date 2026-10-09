@@ -18,8 +18,10 @@ def biseccion(intervalo_a, intervalo_b, tolerancia, iteraciones):
             print("xm es la raiz")
         elif(evaluacion_fronteras > 0):
             intervalo_a = xm
+            comprobar_error()
         else:
             intervalo_b = xm
+            comprobar_error()
     else:
         print("No existe raíz aqui :(")
 
@@ -38,6 +40,12 @@ def comprobar_fronteras(a_evaluado, xm):
     xm_evaluado = polinomio(xm)
     comprobacion_comprobacionaria = a_evaluado * xm_evaluado
     return comprobacion_comprobacionaria
+
+
+def comprobar_error():
+    
+    pass
+
 
 if __name__ == "__main__":
     pass
