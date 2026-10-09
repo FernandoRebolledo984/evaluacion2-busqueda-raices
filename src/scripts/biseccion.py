@@ -13,7 +13,13 @@ def biseccion(intervalo_a, intervalo_b, tolerancia, iteraciones):
     if (comprobacion)<0:
         print("Hay raíz en este intervalo :)")
         xm = calcular_xm(intervalo_a,intervalo_b)
-        comprobar_fronteras(a_evaluado, xm)
+        evaluacion_fronteras = comprobar_fronteras(a_evaluado, xm)
+        if(evaluacion_fronteras == 0):
+            print("xm es la raiz")
+        elif(evaluacion_fronteras > 0):
+            intervalo_a = xm
+        else:
+            intervalo_b = xm
     else:
         print("No existe raíz aqui :(")
 
