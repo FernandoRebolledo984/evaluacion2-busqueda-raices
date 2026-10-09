@@ -9,14 +9,32 @@ import numpy as np
 from main import tolerancia as tol, iteraciones as iter
 
 #Función
-def funcion(x):
+def f(x):
     return np.ln(x) + x - 4
 
-def secante():
-    pass
+#Operaciones para secante
+def secante(f,x0,x1,tol,iter):
+    for i in range(iter):
+        f_x0 = f(x0)
+        f_x1 = f(x1)
+
+        x2 = x1 - f_x1*(x0-x1) / (f_x0 - f_x1) #Fórmula del método secante
+
+        #Comprobamos tolerancia
+        if abs(x2 - x1) < tol:
+            print(f"Raíz encontrada en la iteración {i+1}.\n")
+            return x2
+
+        #Cambiamos los valores para la siguiente iteración
+        x0 = x1
+        x1 = x2
+
+    #Al alcanzar el num maximo de iteraciones:
+    print("Se alcanzó el máximo de iteraciones (100)\n")
+    return x1
 
 if __name__ == "__main__":
     x_0 = 2
     x_1 = 3
 
-    raiz = secante()
+    raiz = secante(f, x_0, x_1, tol, iter)
