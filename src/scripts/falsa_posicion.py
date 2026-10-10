@@ -61,7 +61,6 @@ def fronteras(xr_actual, a_evaluado):
 
 
 if __name__ == "__main__":
-    pass
     #DECLARACION DE INTERVALOS Y LLAMADO A EL METODO CON RETORNO DE DATOS PEDIDOS PARA GARFICO
     intervalo_a = 0.1
     intervalo_b = 1.0
