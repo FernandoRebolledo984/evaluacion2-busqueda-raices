@@ -13,7 +13,7 @@ def derivada_primera(x):
 def derivada_segunda(x):
     return 2.0  #QUEDA LA CONSTANTE
 
-
+#DESARROLLO ENTERO DE NEWTON RAPHSON MEJORADO
 def newton_rapeador_son(punto_actual, tolerancia, iteraciones):
     iteracion_actual = 0
     error_actual = tolerancia + 1
@@ -35,7 +35,7 @@ def newton_rapeador_son(punto_actual, tolerancia, iteraciones):
             iteracion_actual += 1       
     return punto_actual, iteracion_actual, lista_errores  
 
-
+#CRITERIO DE PARADA
 def comprobar_error(x_actual, x_anterior):
     return np.abs(x_actual - x_anterior)
 
