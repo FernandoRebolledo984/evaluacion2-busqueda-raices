@@ -24,11 +24,15 @@ def newton_rapeador_son(punto_actual, tolerancia, iteraciones):
         punto_deri_2 = derivada_segunda(punto_actual)
         numerador = punto_funcion * punto_deri_1
         denominador = np.power(punto_deri_1, 2) - punto_funcion * punto_deri_2
-        nuevo_punto = punto_actual - (numerador/denominador)
-        error_actual = comprobar_error(punto_actual, nuevo_punto)
-        lista_errores.append(error_actual)
-        punto_actual = nuevo_punto  
-        iteracion_actual += 1       
+        if denominador == 0:
+            print("Se está diviendo por 0 :(")
+            return punto_actual, iteracion_actual, lista_errores  
+        else:
+            nuevo_punto = punto_actual - (numerador/denominador)
+            error_actual = comprobar_error(punto_actual, nuevo_punto)
+            lista_errores.append(error_actual)
+            punto_actual = nuevo_punto  
+            iteracion_actual += 1       
     return punto_actual, iteracion_actual, lista_errores  
 
 
