@@ -36,42 +36,41 @@ def secante(f,x0,x1,tol,iteraciones):
     print("Se alcanzó el máximo de iteraciones (100)\n")
     return x1
 
-if __name__ == "__main__":
 
-    #Estimación inicial dada por el profesor
-    x_0 = 2
-    x_1 = 3
+#Estimación inicial dada por el profesor
+x_0 = 2
+x_1 = 3
 
-    tol = 1e-6
-    iteraciones = 100
+tol = 1e-6
+iteraciones = 100
 
-    raiz = secante(f, x_0, x_1, tol, iteraciones)
+raiz = secante(f, x_0, x_1, tol, iteraciones)
 
-    # ======================================== SECCIÓN DE LA GRÁFICA ========================================
-    X = np.linspace(0.1, 5, 400) #0,1 debido a que ln(0) no existe
-    Y = f(X)
+# ======================================== SECCIÓN DE LA GRÁFICA ========================================
+X = np.linspace(0.1, 5, 400) #0,1 debido a que ln(0) no existe
+Y = f(X)
 
-    plt.figure(figsize=(8,6))
-    plt.plot(X, Y, label='f(x) = ln(x) + x - 4', color='aqua', linewidth=2)
+plt.figure(figsize=(8,6))
+plt.plot(X, Y, label='f(x) = ln(x) + x - 4', color='aqua', linewidth=2)
 
-    plt.plot(raiz, f(raiz), 'ro', markersize=5, label=f'Raíz ≈ {raiz:.4f}') #Marcamos la raíz con un punto rojo
+plt.plot(raiz, f(raiz), 'ro', markersize=5, label=f'Raíz ≈ {raiz:.4f}') #Marcamos la raíz con un punto rojo
 
-    #Líneas 'x' y 'y'
-    plt.axhline(0, color='black', linewidth=1)
-    plt.axvline(0, color='black', linewidth=1)
+#Líneas 'x' y 'y'
+plt.axhline(0, color='black', linewidth=1)
+plt.axvline(0, color='black', linewidth=1)
 
-    plt.title('Métodos numéricos - Secante ')
-    plt.xlabel('Eje x')
-    plt.ylabel('Eje y')
-    plt.grid(True, linestyle='--', alpha=0.7)
-    plt.legend()
+plt.title('Métodos numéricos - Secante ')
+plt.xlabel('Eje x')
+plt.ylabel('Eje y')
+plt.grid(True, linestyle='--', alpha=0.7)
+plt.legend()
 
-    #Guardamos en el directorio de assets
-    directorio_script = os.path.dirname(os.path.abspath(__file__))
-    ruta_graficas = os.path.abspath(os.path.join(directorio_script, '..', 'assets'))
-    ruta_guardado = os.path.join(ruta_graficas, 'grafica_secante.png')
+#Guardamos en el directorio de assets
+directorio_script = os.path.dirname(os.path.abspath(__file__))
+ruta_graficas = os.path.abspath(os.path.join(directorio_script, '..', 'assets'))
+ruta_guardado = os.path.join(ruta_graficas, 'grafica_secante.png')
 
-    #En caso de que la ruta no exista
-    os.makedirs(ruta_graficas, exist_ok=True)
+#En caso de que la ruta no exista
+os.makedirs(ruta_graficas, exist_ok=True)
 
-    plt.savefig(ruta_guardado, dpi=300, bbox_inches='tight')
+plt.savefig(ruta_guardado, dpi=300, bbox_inches='tight')
