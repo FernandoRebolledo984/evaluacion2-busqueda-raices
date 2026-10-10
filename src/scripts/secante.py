@@ -25,7 +25,7 @@ def secante(f,x0,x1,tol,iteraciones):
 
         #Comprobamos tolerancia
         if abs(x2 - x1) < tol:
-            print(f"\nMétodo de la secante: Raíz encontrada en la iteración {i+1}.\n")
+            print(f"\n\nMétodo de la secante: Raíz encontrada en la iteración {i+1}.\n")
             return x2
 
         #Cambiamos los valores para la siguiente iteración
@@ -36,6 +36,7 @@ def secante(f,x0,x1,tol,iteraciones):
     print("Se alcanzó el máximo de iteraciones (100)\n")
     return x1
 
+# ======================================== MAIN ========================================
 
 #Estimación inicial dada por el profesor
 x_0 = 2
