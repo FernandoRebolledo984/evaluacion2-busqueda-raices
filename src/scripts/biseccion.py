@@ -69,7 +69,7 @@ if __name__ == "__main__":
     iteraciones = 100
     raiz, iters, lista_errores = biseccion(intervalo_a, intervalo_b, tolerancia, iteraciones)
     if raiz is not None:
-        print(f"\n--- RESULTADOS FINALES ---")
+        print(f"\nRESULTADOS")
         print(f"Raíz aproximada: {raiz}")
         print(f"Iteraciones necesarias: {iters}")
         print(f"Error final: {lista_errores[-1]}")
