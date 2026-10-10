@@ -9,6 +9,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 import os
 
+
+# ======================================== CÓDIGO PRINCIPAL ========================================
 #Función
 def f(x):
     return np.log(x) + x - 4
@@ -45,7 +47,7 @@ if __name__ == "__main__":
 
     raiz = secante(f, x_0, x_1, tol, iteraciones)
 
-    #---Sección de la gráfica---
+    # ======================================== SECCIÓN DE LA GRÁFICA ========================================
     X = np.linspace(0.1, 5, 400) #0,1 debido a que ln(0) no existe
     Y = f(X)
 
