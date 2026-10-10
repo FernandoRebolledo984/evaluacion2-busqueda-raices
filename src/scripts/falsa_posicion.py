@@ -18,6 +18,9 @@ def falsa_posicion(intervalo_a, intervalo_b, tolerancia, iteraciones):
         while(error_actual > tolerancia and iteracion_actual < iteraciones):
             xr_actual = xr_falsa_posicion(intervalo_a, intervalo_b, a_evaluado, b_evaluado)
             error = error(xr_actual, xr_anterior)
+            if iteracion_actual > 0:
+                lista_errores.append(error_actual)
+            comprobacion_fronteras = fronteras(xr_actual, a_evaluado)
 
     
 def comprobacion_de_raiz(a_evaluado, b_evaluado):
@@ -34,7 +37,14 @@ def xr_falsa_posicion(intervalo_a, intervalo_b, a_evaluado, b_evaluado):
 
 
 def error(xr_actual, xr_anterior):
-    pass
+    error_actual = np.abs(xr_actual - xr_anterior)
+    return error_actual
+
+
+def fronteras(xr_actual, a_evaluado):
+    xm_evaluado = funcion_mixta(xr_actual)
+    comprobacion_comprobacionaria = a_evaluado * xm_evaluado
+    return comprobacion_comprobacionaria
 
 
 if __name__ == "__main__":
