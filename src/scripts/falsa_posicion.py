@@ -17,10 +17,23 @@ def falsa_posicion(intervalo_a, intervalo_b, tolerancia, iteraciones):
         xr_anterior = intervalo_a
         while(error_actual > tolerancia and iteracion_actual < iteraciones):
             xr_actual = xr_falsa_posicion(intervalo_a, intervalo_b, a_evaluado, b_evaluado)
-            error = error(xr_actual, xr_anterior)
+            error_actual = comprobar_error(xr_actual, xr_anterior)
             if iteracion_actual > 0:
                 lista_errores.append(error_actual)
             comprobacion_fronteras = fronteras(xr_actual, a_evaluado)
+            if comprobacion_fronteras == 0:
+                break
+            elif comprobacion_fronteras > 0:
+                intervalo_a = xr_actual
+                a_evaluado = funcion_mixta(intervalo_a) # Actualizar a_evaluado
+            else:
+                intervalo_b = xr_actual
+                b_evaluado = funcion_mixta(intervalo_b) # Actualizar b_evaluado
+            
+            xr_anterior = xr_actual
+            iteracion_actual += 1
+
+    return xr_actual, iteracion_actual, lista_errores
 
     
 def comprobacion_de_raiz(a_evaluado, b_evaluado):
@@ -36,7 +49,7 @@ def xr_falsa_posicion(intervalo_a, intervalo_b, a_evaluado, b_evaluado):
     return xm
 
 
-def error(xr_actual, xr_anterior):
+def comprobar_error(xr_actual, xr_anterior):
     error_actual = np.abs(xr_actual - xr_anterior)
     return error_actual
 
@@ -55,3 +68,8 @@ if __name__ == "__main__":
     tolerancia = 1e-6
     iteraciones = 100
     raiz, iters, lista_errores = falsa_posicion(intervalo_a, intervalo_b, tolerancia, iteraciones)
+    if raiz is not None:
+        print(f"\nRESULTADOS")
+        print(f"Raíz aproximada: {raiz}")
+        print(f"Iteraciones necesarias: {iters}")
+        print(f"Error final: {lista_errores[-1]}")
