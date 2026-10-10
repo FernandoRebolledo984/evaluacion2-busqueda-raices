@@ -52,7 +52,7 @@ if __name__ == "__main__":
     plt.figure(figsize=(8,6))
     plt.plot(X, Y, label='f(x) = ln(x) + x - 4', color='aqua', linewidth=2)
 
-    plt.plot(raiz, f(raiz), 'ro', markersize=8, label=f'Raíz ≈ {raiz:.4f}') #Marcamos la raíz con un punto rojo
+    plt.plot(raiz, f(raiz), 'ro', markersize=5, label=f'Raíz ≈ {raiz:.4f}') #Marcamos la raíz con un punto rojo
 
     #Líneas 'x' y 'y'
     plt.axhline(0, color='black', linewidth=1)
