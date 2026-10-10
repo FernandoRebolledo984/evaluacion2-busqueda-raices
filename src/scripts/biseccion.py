@@ -18,32 +18,25 @@ def biseccion(intervalo_a, intervalo_b, tolerancia, iteraciones):
         xm_anterior = intervalo_a
         while error_actual > tolerancia and iteracion_actual < iteraciones:
             xm = calcular_xm(intervalo_a, intervalo_b)
-
-            # --- CÁLCULO DE ERROR ---
+            #CÁLCULO DE ERROR
             error_actual = comprobar_error(xm, xm_anterior)
             if iteracion_actual > 0: # Evita guardar el primer error falso
                 lista_errores.append(error_actual)
-            
-            # Es importante recalcular el a_evaluado porque el intervalo_a pudo haber cambiado
             a_evaluado_actual = polinomio(intervalo_a)
             evaluacion_fronteras = comprobar_fronteras(a_evaluado_actual, xm)
-            
             if(evaluacion_fronteras == 0):
-                print("xm es la raiz")
-                break # Rompe el ciclo si la encuentra exacta
+                print("Caiste justo en el 0")
+                break
             elif(evaluacion_fronteras > 0):
                 intervalo_a = xm
             else:
                 intervalo_b = xm
-            
-            # Prepara la siguiente iteración
             xm_anterior = xm
             iteracion_actual += 1
-            
-        # --- RETURN NECESARIO PARA EVITAR EL ERROR EN LA LÍNEA 54 ---
         return xm, iteracion_actual, lista_errores
     else:
         print("No existe raíz aqui :(")
+        return None, 0, []
 
 
 def comprobacion_de_raiz(a_evaluado, b_evaluado):
@@ -62,9 +55,9 @@ def comprobar_fronteras(a_evaluado, xm):
     return comprobacion_comprobacionaria
 
 
-def comprobar_error():
-
-    pass
+def comprobar_error(xm_actual, xm_anterior):
+    error = np.abs(xm_actual - xm_anterior)
+    return error
 
 
 if __name__ == "__main__":
@@ -75,3 +68,8 @@ if __name__ == "__main__":
     tolerancia = 1e-6
     iteraciones = 100
     raiz, iters, lista_errores = biseccion(intervalo_a, intervalo_b, tolerancia, iteraciones)
+    if raiz is not None:
+        print(f"\n--- RESULTADOS FINALES ---")
+        print(f"Raíz aproximada: {raiz}")
+        print(f"Iteraciones necesarias: {iters}")
+        print(f"Error final: {lista_errores[-1]}")
