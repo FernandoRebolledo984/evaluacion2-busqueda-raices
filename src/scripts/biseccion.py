@@ -12,16 +12,36 @@ def biseccion(intervalo_a, intervalo_b, tolerancia, iteraciones):
     comprobacion = comprobacion_de_raiz(a_evaluado, b_evaluado)
     if (comprobacion)<0:
         print("Hay raíz en este intervalo :)")
-        xm = calcular_xm(intervalo_a,intervalo_b)
-        evaluacion_fronteras = comprobar_fronteras(a_evaluado, xm)
-        if(evaluacion_fronteras == 0):
-            print("xm es la raiz")
-        elif(evaluacion_fronteras > 0):
-            intervalo_a = xm
-            comprobar_error()
-        else:
-            intervalo_b = xm
-            comprobar_error()
+        iteracion_actual = 0
+        error_actual = tolerancia + 1
+        lista_errores = []
+        xm_anterior = intervalo_a
+        while error_actual > tolerancia and iteracion_actual < iteraciones:
+            xm = calcular_xm(intervalo_a, intervalo_b)
+
+            # --- CÁLCULO DE ERROR ---
+            error_actual = comprobar_error(xm, xm_anterior)
+            if iteracion_actual > 0: # Evita guardar el primer error falso
+                lista_errores.append(error_actual)
+            
+            # Es importante recalcular el a_evaluado porque el intervalo_a pudo haber cambiado
+            a_evaluado_actual = polinomio(intervalo_a)
+            evaluacion_fronteras = comprobar_fronteras(a_evaluado_actual, xm)
+            
+            if(evaluacion_fronteras == 0):
+                print("xm es la raiz")
+                break # Rompe el ciclo si la encuentra exacta
+            elif(evaluacion_fronteras > 0):
+                intervalo_a = xm
+            else:
+                intervalo_b = xm
+            
+            # Prepara la siguiente iteración
+            xm_anterior = xm
+            iteracion_actual += 1
+            
+        # --- RETURN NECESARIO PARA EVITAR EL ERROR EN LA LÍNEA 54 ---
+        return xm, iteracion_actual, lista_errores
     else:
         print("No existe raíz aqui :(")
 
@@ -43,7 +63,7 @@ def comprobar_fronteras(a_evaluado, xm):
 
 
 def comprobar_error():
-    
+
     pass
 
 
