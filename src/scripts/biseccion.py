@@ -61,7 +61,6 @@ def comprobar_error(xm_actual, xm_anterior):
 
 
 if __name__ == "__main__":
-    pass
     #DECLARACION DE INTERVALOS Y LLAMADO A EL METODO CON RETORNO DE DATOS PEDIDOS PARA GARFICO
     intervalo_a = 1.0
     intervalo_b = 2.0
