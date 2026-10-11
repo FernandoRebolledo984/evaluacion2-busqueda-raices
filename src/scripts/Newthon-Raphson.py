@@ -27,7 +27,7 @@ def NR(f, g, x0, tol, iteracion):
         error = np.abs(x_nxt - x_actual) 
 
         if error < tol or np.abs(f(x_nxt)) < tol:
-            print(f"Convergencia en iteración {i}.\n")
+            print(f"Convergencia en iteración {i+1}.")
             return x_nxt
 
         x_actual = x_nxt
@@ -37,7 +37,7 @@ def NR(f, g, x0, tol, iteracion):
 
 # ======================================== MAIN ========================================
 
-print("\n\nMétodo Newthon-Raphson\n")
+print("\n\nMétodo Newthon-Raphson")
 
 a = 0
 b = 0
@@ -45,14 +45,13 @@ x0 = 0.5
 tol = 1e-6
 iteracion = 100
 
-print("Demostración de la existencia de la raíz")
 f_a = f(a)
 f_b = f(b)
 comprobacion = f_a * f_b
 if comprobacion < 0:
-    print(f"Comprobación Bolzano: f(a)*f(b) = {comprobacion} < 0, por lo que la raíz está en el rango.\n")
+    print(f"Comprobación Bolzano: f(a)*f(b) = {comprobacion} < 0, por lo que la raíz está en el rango.")
 else:
-    print(f"Comprobación Bolzano: f(a)*f(b) = {comprobacion} >= 0, por lo que los valores no sirven.\n")
+    print(f"Comprobación Bolzano: f(a)*f(b) = {comprobacion} >= 0, por lo que los valores no sirven.")
 
 raiz = NR(f, g, x0, tol, iteracion)
 print(f"La raíz aproximada es: {raiz:.8f}\n")
