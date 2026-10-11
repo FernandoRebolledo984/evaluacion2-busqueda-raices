@@ -45,14 +45,6 @@ x0 = 0.5
 tol = 1e-6
 iteracion = 100
 
-f_a = f(a)
-f_b = f(b)
-comprobacion = f_a * f_b
-if comprobacion < 0:
-    print(f"Comprobación Bolzano: f(a)*f(b) = {comprobacion} < 0, por lo que la raíz está en el rango.")
-else:
-    print(f"Comprobación Bolzano: f(a)*f(b) = {comprobacion} >= 0, por lo que los valores no sirven.")
-
 raiz = NR(f, g, x0, tol, iteracion)
 print(f"La raíz aproximada es: {raiz:.8f}\n")
 
