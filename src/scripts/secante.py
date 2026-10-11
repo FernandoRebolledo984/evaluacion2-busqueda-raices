@@ -25,7 +25,7 @@ def secante(f,x0,x1,tol,iteraciones):
 
         #Comprobamos tolerancia
         if abs(x2 - x1) < tol:
-            print(f"\n\nMétodo de la secante: Raíz encontrada en la iteración {i+1}.\n")
+            print(f"Convergencia en iteración {i+1}.")
             return x2
 
         #Cambiamos los valores para la siguiente iteración
@@ -37,7 +37,7 @@ def secante(f,x0,x1,tol,iteraciones):
     return x1
 
 # ======================================== MAIN ========================================
-
+print("\n\nMétodo de la secante")
 #Estimación inicial dada por el profesor
 x_0 = 2
 x_1 = 3
@@ -47,11 +47,12 @@ iteraciones = 100
 
 comprobacion = f(x_0) * f(x_1)
 if comprobacion < 0:
-    print(f"Comprobación Bolzano: f(a)*f(b) = {comprobacion} < 0, por lo que la raíz está en el rango.\n")
+    print(f"Comprobación Bolzano: {f(x_0)} * {f(x_1)} = {comprobacion} < 0, por lo que la raíz está en el rango.")
 else:
-    print(f"Comprobación Bolzano: f(a)*f(b) = {comprobacion} >= 0, por lo que los valores no sirven.\n")
+    print(f"Comprobación Bolzano: {f(x_0)} * {f(x_1)} = {comprobacion} >= 0, por lo que los valores no sirven.")
 
 raiz = secante(f, x_0, x_1, tol, iteraciones)
+print(f"La raíz aproximada es {raiz:.6f}\n")
 
 # ======================================== SECCIÓN DE LA GRÁFICA ========================================
 X = np.linspace(0.1, 5, 400) #0,1 debido a que ln(0) no existe

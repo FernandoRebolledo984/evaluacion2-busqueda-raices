@@ -26,20 +26,18 @@ def punto_fijo(g, x0, tol, iteracion):
 
         error = np.abs(x_nxt - x_actual)
 
-        print(f"Iteración {i+1}: x = {x_nxt:.7f}, error = {error:.7f}\n")
-
         if error < tol:
-            print(f"Convergencia en iteración {i+1}\n")
+            print(f"Convergencia en iteración {i+1}")
             return x_nxt
 
         x_actual = x_nxt
 
-    print("El método no convergió en el número máximo de iteraciones\n") #En caso de pasarse
+    print("El método no convergió en el número máximo de iteraciones") #En caso de pasarse
     return 0
 
 # ======================================== MAIN ========================================
 
-print("\n\nMétodo del Punto Fijo\n")
+print("\n\nMétodo del Punto Fijo")
 
 a = 0
 b = 1
@@ -47,14 +45,12 @@ x0 = 0.5
 tol = 1e-6
 iteracion = 100
 
-print(f"Demostración de existencia de la raíz:")
 f_a = f(a)
 f_b = f(b)
-print(f"f({a}) = {f_a} // f({b}) = {f_b}")
 if f_a * f_b < 0:
-    print(f"{f_a} * {f_b} < 0, por lo que existe raíz.\n")
+    print(f"Comprobación bolzano: {f_a} * {f_b} < 0, por lo que existe raíz.")
 else:
-    print(f"{f_a} * {f_b} >= 0, por lo tanto no existe raíz.\n") #Nunca se ejecutará por los valores que ya definimos
+    print(f"Comprobación bolzano: {f_a} * {f_b} >= 0, por lo tanto no existe raíz.") #Nunca se ejecutará por los valores que ya definimos
 
 raiz = punto_fijo(g, x0, tol, iteracion)
 
