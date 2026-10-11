@@ -20,20 +20,21 @@ def g(x):
 
 def punto_fijo(g, x0, tol, iteracion):
     x_actual = x0
+    errores = [] #Para las tablas
 
     for i in range(iteracion):
         x_nxt = g(x_actual) #Fórmula método
-
         error = np.abs(x_nxt - x_actual)
+        errores.append(error)
 
         if error < tol:
             print(f"Convergencia en iteración {i+1}")
-            return x_nxt
+            return x_nxt, errores
 
         x_actual = x_nxt
 
     print("El método no convergió en el número máximo de iteraciones") #En caso de pasarse
-    return 0
+    return x_actual, errores
 
 # ======================================== MAIN ========================================
 
@@ -45,25 +46,23 @@ x0 = 0.5
 tol = 1e-6
 iteracion = 100
 
-raiz = punto_fijo(g, x0, tol, iteracion)
+raiz, errores = punto_fijo(g, x0, tol, iteracion)
 
 print(f"La raíz aproximada es {raiz:.7f}\n")
 
 # ======================================== GRÁFICA ========================================
-X = np.linspace(-1, 2, 400)
-Y = f(X)
+iteraciones_x = np.arange(1, len(errores)+1)
 
 plt.figure(figsize=(8,5))
-plt.plot(X, Y, label=r'$f(x) = \cos(x) - x$', color='aqua', linewidth=2)
-plt.axhline(0,color='black',linewidth=1,linestyle='--') #Eje X
+plt.plot(iteraciones_x, errores, marker='o', color='aqua', markeredgecolor='aqua', linewidth=2, label='Error absoluto')
+plt.axhline(tol, color='red', linestyle='--', linewidth=1, label='Tolerancia')
 
-plt.plot(raiz,0,'ro',markersize=8,label=f'Raíz aprox: {raiz:.6f}') #Marcador de la raíz
-
-plt.title("Método numérico - Punto Fijo", fontsize=14)
-plt.xlabel("x", fontsize=12)
-plt.ylabel("y", fontsize=12)
+plt.title("Convergencia de error - Punto Fijo", fontsize=14)
+plt.xlabel("Iteración", fontsize=12)
+plt.ylabel("Error Absoluto", fontsize=12)
+plt.xticks(iteraciones_x)
 plt.grid(True, alpha=0.4)
-plt.legend(loc='upper right', fontsize=10)
+plt.legend()
 
 directorio_script = os.path.dirname(os.path.abspath(__file__))
 ruta_graficas = os.path.abspath(os.path.join(directorio_script, '..', 'assets'))
@@ -78,5 +77,5 @@ plt.savefig(ruta_guardado, dpi=300, bbox_inches='tight')
 ruta_data = os.path.abspath(os.path.join(directorio_script, '..', 'data'))
 os.makedirs(ruta_data, exist_ok=True)
 ruta_csv = os.path.join(ruta_data, 'punto_fijo.csv')
-csv_datos = np.column_stack((X,Y))
-np.savetxt(ruta_csv, csv_datos, delimiter=',', header='x, f(x)', comments='', fmt='%.6f')
+csv_datos = np.column_stack((iteraciones_x,errores))
+np.savetxt(ruta_csv, csv_datos, delimiter=',', header='iteracion, error_absoluto', comments='', fmt=['%d', '%.8f'])

@@ -58,12 +58,12 @@ if __name__ == "__main__":
     # El eje X serán los números de iteración (1, 2, 3...)
     eje_x_iteraciones = np.arange(1, len(lista_errores) + 1)
         
-    plt.plot(eje_x_iteraciones, lista_errores, marker='o', color='blue', label='Error Absoluto')
+    plt.plot(eje_x_iteraciones, lista_errores, marker='o', color='aqua', label='Error Absoluto')
     plt.yscale('log')
         
-    plt.title("Convergencia: Newton-Raphson Mejorado (Error vs Iteraciones)")
+    plt.title("Convergencia del error - Newton-Raphson Mejorado")
     plt.xlabel("Iteración")
-    plt.ylabel("Error Absoluto (Log)")
+    plt.ylabel("Error Absoluto")
     plt.grid(True, which="both", linestyle='--', alpha=0.7)
     plt.legend()
         

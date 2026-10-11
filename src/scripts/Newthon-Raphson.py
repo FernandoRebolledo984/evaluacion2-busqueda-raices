@@ -54,7 +54,7 @@ print(f"La raíz aproximada es: {raiz:.8f}\n")
 iteraciones_x = np.arange(1, len(errores)+1)
 
 plt.figure(figsize=(8, 6))
-plt.plot(iteraciones_x, errores, marker='o', color='blue', markeredgecolor='blue', label='Error absoluto')
+plt.plot(iteraciones_x, errores, marker='o', color='aqua', markeredgecolor='aqua', label='Error absoluto')
 plt.axhline(tol, color='red', linestyle='--',linewidth=1, label='Tolerancia')
 
 plt.title('Convergencia del error - Newthon-Raphson')
