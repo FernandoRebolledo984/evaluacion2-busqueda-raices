@@ -70,7 +70,7 @@ if __name__ == "__main__":
     iteraciones = 100
     raiz, iters, lista_errores = falsa_posicion(intervalo_a, intervalo_b, tolerancia, iteraciones)
     if raiz is not None:
-        print(f"\nRESULTADOS")
+        print(f"\nRESULTADOS FALSA POSICION")
         print(f"Raíz aproximada: {raiz}")
         print(f"Iteraciones necesarias: {iters}")
         print(f"Error final: {lista_errores[-1]}")

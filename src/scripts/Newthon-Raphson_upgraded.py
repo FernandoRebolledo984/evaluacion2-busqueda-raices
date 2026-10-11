@@ -48,7 +48,7 @@ if __name__ == "__main__":
     iteraciones = 100
     raiz, iters, lista_errores = newton_rapeador_son(punto_inicial, tolerancia, iteraciones)
     if raiz is not None:
-            print(f"\nRESULTADOS")
+            print(f"\nRESULTADOS NR MEJORADO")
             print(f"Raíz aproximada: {raiz}")
             print(f"Iteraciones necesarias: {iters}")
             print(f"Error final: {lista_errores[-1]}")
