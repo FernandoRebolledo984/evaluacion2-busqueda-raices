@@ -17,16 +17,19 @@ def f(x):
 
 #Operaciones para secante
 def secante(f,x0,x1,tol,iteraciones):
+    errores = [] #Para la tabla
     for i in range(iteraciones):
         f_x0 = f(x0)
         f_x1 = f(x1)
 
         x2 = x1 - f_x1*(x0-x1) / (f_x0 - f_x1) #Fórmula del método secante
+        error = abs(x2-x1)
+        errores.append(error)
 
         #Comprobamos tolerancia
-        if abs(x2 - x1) < tol:
+        if error < tol:
             print(f"Convergencia en iteración {i+1}.")
-            return x2
+            return x2, errores
 
         #Cambiamos los valores para la siguiente iteración
         x0 = x1
@@ -34,35 +37,30 @@ def secante(f,x0,x1,tol,iteraciones):
 
     #Al alcanzar el num maximo de iteraciones:
     print("Se alcanzó el máximo de iteraciones (100)\n")
-    return x1
+    return x1, errores
 
 # ======================================== MAIN ========================================
 print("\n\nMétodo de la secante")
 #Estimación inicial dada por el profesor
 x_0 = 2
 x_1 = 3
-
 tol = 1e-6
 iteraciones = 100
 
-raiz = secante(f, x_0, x_1, tol, iteraciones)
+raiz, errores = secante(f, x_0, x_1, tol, iteraciones)
 print(f"La raíz aproximada es {raiz:.6f}\n")
 
 # ======================================== SECCIÓN DE LA GRÁFICA ========================================
-X = np.linspace(0.1, 5, 400) #0,1 debido a que ln(0) no existe
-Y = f(X)
+iteraciones_x = np.arange(1, len(errores)+1)
 
 plt.figure(figsize=(8,6))
-plt.plot(X, Y, label='f(x) = ln(x) + x - 4', color='aqua', linewidth=2)
+plt.plot(iteraciones_x, errores, marker='o', color='blue', markeredgecolor='blue', linewidth=2, label='Error absoluto')
+plt.axhline(tol, color='red', linestyle='--', linewidth=1, label=f'Tolerancia')
 
-plt.plot(raiz, f(raiz), 'ro', markersize=5, label=f'Raíz ≈ {raiz:.4f}') #Marcamos la raíz con un punto rojo
-
-plt.axhline(0, color='black', linewidth=1)
-plt.axvline(0, color='black', linewidth=1)
-
-plt.title('Método numérico - Secante ')
-plt.xlabel('Eje x')
-plt.ylabel('Eje y')
+plt.title('Convergencia del error - Método de la Secante ')
+plt.xlabel('Iteración')
+plt.ylabel('Error absoluto')
+plt.xticks(iteraciones_x)
 plt.grid(True, linestyle='--', alpha=0.7)
 plt.legend()
 
@@ -77,5 +75,5 @@ plt.savefig(ruta_guardado, dpi=300, bbox_inches='tight')
 ruta_data = os.path.abspath(os.path.join(directorio_script, '..', 'data'))
 os.makedirs(ruta_data, exist_ok=True)
 ruta_csv = os.path.join(ruta_data, 'secante.csv')
-csv_datos = np.column_stack((X,Y))
-np.savetxt(ruta_csv, csv_datos, delimiter=',', header='x, f(x)', comments='', fmt='%.6f')
+csv_datos = np.column_stack((iteraciones_x,errores))
+np.savetxt(ruta_csv, csv_datos, delimiter=',', header='iteracion, error_absoluto)', comments='', fmt=['%d', '%.8f'])
