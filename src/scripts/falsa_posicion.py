@@ -74,21 +74,19 @@ if __name__ == "__main__":
         print(f"Raíz aproximada: {raiz}")
         print(f"Iteraciones necesarias: {iters}")
         print(f"Error final: {lista_errores[-1]}")
-    X = np.linspace(0.0, 1.5, 200)
-    Y = funcion_mixta(X)
-        
+    # ======================================== GRAFICA DE CONVERGENCIA ========================================
     plt.figure(figsize=(8, 5))
-    plt.plot(X, Y, label="f(x) = √x - cos(x)", color='aqua')
+    
+    # El eje X serán los números de iteración (1, 2, 3...)
+    eje_x_iteraciones = np.arange(1, len(lista_errores) + 1)
         
-    plt.axhline(0, color='black', linewidth=1)
+    plt.plot(eje_x_iteraciones, lista_errores, marker='o', color='blue', label='Error Absoluto')
+    plt.yscale('log')
         
-    #Marcar la raíz 
-    plt.scatter([raiz], [0], color='red', zorder=5, label=f"Raíz = {raiz:.5f}")
-        
-    plt.title("Método Numérico - Falsa Posición")
-    plt.xlabel("x")
-    plt.ylabel("y")
-    plt.grid(True, linestyle='--', alpha=0.7)
+    plt.title("Convergencia: Falsa Posición (Error vs Iteraciones)")
+    plt.xlabel("Iteración")
+    plt.ylabel("Error Absoluto (Log)")
+    plt.grid(True, which="both", linestyle='--', alpha=0.7)
     plt.legend()
         
     directorio_script = os.path.dirname(os.path.abspath(__file__))
@@ -97,10 +95,15 @@ if __name__ == "__main__":
 
     os.makedirs(ruta_graficas, exist_ok=True)
     plt.savefig(ruta_guardado, dpi=300, bbox_inches='tight')
+    plt.close()
 
-    # ======================================== ARCHIVO CSV ========================================
+    # ======================================== ARCHIVO CSV (CONVERGENCIA) ========================================
     ruta_data = os.path.abspath(os.path.join(directorio_script, '..', 'data'))
     os.makedirs(ruta_data, exist_ok=True)
     ruta_csv = os.path.join(ruta_data, 'falsa_posicion.csv')
-    csv_datos = np.column_stack((X,Y))
-    np.savetxt(ruta_csv, csv_datos, delimiter=',', header='x, f(x)', comments='', fmt='%.6f')
+    
+    # Emparejamos la iteración con su respectivo error
+    csv_datos = np.column_stack((eje_x_iteraciones, lista_errores))
+    
+    # Guardamos usando formato entero para la iteración (%d) y notación científica para el error (%.8e)
+    np.savetxt(ruta_csv, csv_datos, delimiter=',', header='Iteracion,Error_Absoluto', comments='', fmt=['%d', '%.8e'])
