@@ -18,6 +18,7 @@ def g(x):
 
 def NR(f, g, x0, tol, iteracion):
     x_actual = 0
+    errores = [] #Para las gráficas
 
     for i in range(iteracion):
         f_x = f(x_actual)
@@ -25,15 +26,16 @@ def NR(f, g, x0, tol, iteracion):
 
         x_nxt = x_actual - (f_x / g_x)
         error = np.abs(x_nxt - x_actual) 
+        errores.append(error) #Almacenamos para las gráficas
 
         if error < tol or np.abs(f(x_nxt)) < tol:
             print(f"Convergencia en iteración {i+1}.")
-            return x_nxt
+            return x_nxt, errores
 
         x_actual = x_nxt
 
     print("Iteraciones máximas alcanzadas, no se logró converger.\n")
-    return x_actual
+    return x_actual, errores
 
 # ======================================== MAIN ========================================
 
@@ -45,24 +47,20 @@ x0 = 0.5
 tol = 1e-6
 iteracion = 100
 
-raiz = NR(f, g, x0, tol, iteracion)
+raiz, errores = NR(f, g, x0, tol, iteracion)
 print(f"La raíz aproximada es: {raiz:.8f}\n")
 
 # ======================================== GRAFICA ========================================
-X = np.linspace(-0.5, 1.0, 400)
-Y = f(X)
+iteraciones_x = np.arange(1, len(errores)+1)
 
 plt.figure(figsize=(8, 6))
-plt.plot(X, Y, label=r'f(x) = e^{-x} - x', color='aqua', linewidth=2)
+plt.plot(iteraciones_x, errores, marker='o', color='blue', markeredgecolor='blue', label='Error absoluto')
+plt.axhline(tol, color='red', linestyle='--',linewidth=1, label='Tolerancia')
 
-plt.plot(raiz, f(raiz), 'ro', markersize=5, label=f'Raíz ≈ {raiz:.4f}') #Marcamos la raíz
-
-plt.axhline(0, color='black', linewidth=1)
-plt.axvline(0, color='black', linewidth=1)
-
-plt.title('Método Numérico - Newthon-Raphson')
-plt.xlabel('Eje x')
-plt.ylabel('Eje y')
+plt.title('Convergencia del error - Newthon-Raphson')
+plt.xlabel('Iteración')
+plt.ylabel('Error absoluto')
+plt.xticks(iteraciones_x)
 plt.grid(True, linestyle='--', alpha=0.7)
 plt.legend()
 
@@ -77,5 +75,5 @@ plt.savefig(ruta_guardado, dpi=300, bbox_inches='tight')
 ruta_data = os.path.abspath(os.path.join(directorio_script, '..', 'data'))
 os.makedirs(ruta_data, exist_ok=True)
 ruta_csv = os.path.join(ruta_data, 'Newthon_Raphson.csv')
-csv_datos = np.column_stack((X,Y))
+csv_datos = np.column_stack((iteraciones_x,errores))
 np.savetxt(ruta_csv, csv_datos, delimiter=',', header='x, f(x)', comments='', fmt='%.6f')
