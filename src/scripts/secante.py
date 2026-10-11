@@ -45,12 +45,6 @@ x_1 = 3
 tol = 1e-6
 iteraciones = 100
 
-comprobacion = f(x_0) * f(x_1)
-if comprobacion < 0:
-    print(f"Comprobación Bolzano: {f(x_0)} * {f(x_1)} = {comprobacion} < 0, por lo que la raíz está en el rango.")
-else:
-    print(f"Comprobación Bolzano: {f(x_0)} * {f(x_1)} = {comprobacion} >= 0, por lo que los valores no sirven.")
-
 raiz = secante(f, x_0, x_1, tol, iteraciones)
 print(f"La raíz aproximada es {raiz:.6f}\n")
 

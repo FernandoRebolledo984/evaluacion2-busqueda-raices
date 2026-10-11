@@ -45,13 +45,6 @@ x0 = 0.5
 tol = 1e-6
 iteracion = 100
 
-f_a = f(a)
-f_b = f(b)
-if f_a * f_b < 0:
-    print(f"Comprobación bolzano: {f_a} * {f_b} < 0, por lo que existe raíz.")
-else:
-    print(f"Comprobación bolzano: {f_a} * {f_b} >= 0, por lo tanto no existe raíz.") #Nunca se ejecutará por los valores que ya definimos
-
 raiz = punto_fijo(g, x0, tol, iteracion)
 
 print(f"La raíz aproximada es {raiz:.7f}\n")
