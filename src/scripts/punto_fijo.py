@@ -18,10 +18,10 @@ def f(x):
 def g(x):
     return np.cos(x)
 
-def punto_fijo(g, x0, tol, iter):
+def punto_fijo(g, x0, tol, iteracion):
     x_actual = x0
 
-    for i in range(iter):
+    for i in range(iteracion):
         x_nxt = g(x_actual) #Fórmula método
 
         error = np.abs(x_nxt - x_actual)
@@ -45,7 +45,7 @@ a = 0
 b = 1
 x0 = 0.5
 tol = 1e-6
-iter = 100
+iteracion = 100
 
 print(f"Demostración de existencia de la raíz:")
 f_a = f(a)
@@ -56,7 +56,7 @@ if f_a * f_b < 0:
 else:
     print(f"{f_a} * {f_b} >= 0, por lo tanto no existe raíz.\n") #Nunca se ejecutará por los valores que ya definimos
 
-raiz = punto_fijo(g, x0, tol, iter)
+raiz = punto_fijo(g, x0, tol, iteracion)
 
 print(f"La raíz aproximada es {raiz:.7f}\n")
 
