@@ -89,7 +89,7 @@ if __name__ == "__main__":
         
     plt.title("Método Numérico - Bisección")
     plt.xlabel("x")
-    plt.ylabel("f(x)")
+    plt.ylabel("y")
     plt.grid(True, linestyle='--', alpha=0.7)
     plt.legend()
         
