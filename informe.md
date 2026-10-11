@@ -10,8 +10,15 @@ RESPUESTAS:
 
 1.- El metodo que convergió más rapido fue Newton Raphson Mejorado ejecutado con la función de raiz doble f(x) = (x − 2)², se encontró la raiz en 1 iteracion siendo la raíz 2.0 y el porque de esto es que al desarrollar la segunda iteracion se topa con la situacion de division por 0 a la hora de conocer el nuevo punto.
 
+2.- Los métodos de Bisección, Falsa Posición y Punto Fijo tienen convergencia lineal viendose como una recta diagonal descendente en el gráfico, el método de la Secante es superlineal, y los métodos de Newton son cuadráticos, lo que se ve como una curva cóncava que cae rapidamente hacia cero
 
-2.- Los ordenes de convergencia son lineal (bisección, falsa posición, punto fijo), superlineal (secante ≈ 1,618) y cuadrático (Newton y Newton mejorado en raíces simples).
+3.- Los métodos que requieren un intervalo con cambio de signo son la Bisección y la Falsa Posición, mientras que Newton-Raphson (normal y mejorado), Punto Fijo y Secante no lo necesitan ya que son cerrados
+
+4.-En la función de raíz doble fallan los métodos de Bisección y Falsa Posición porque al no cruzar el eje X no existe el cambio de signo que necesitan para funcionar, no como en Newton-Raphson Mejorado se comporta mejor, igualmente dando division por cero pero cortando ahi la iteracion, da la respuesta.
+
+5.-S el intervalo o el valor inicial dado es mas lejano a la raiz, el metodo se vera envuelto en mas iteraciones y mas calculos lo que se traduce en más tiempo de convergencia. 
+
+6.-Se recomienda Bisección para máxima robustez al asegurar siempre la convergencia, Newton-Raphson (Normal o Mejorado) para máxima velocidad si las derivadas son fáciles de calcular, y la Secante como el mejor equilibrio general porque es rápida y no requiere derivadas.
 
 El informe.md debe cerrar con una conclusión argumentada que responda:
 -¿Qué método elegirían para cada tipo de función y por qué (velocidad vs robustez)?
