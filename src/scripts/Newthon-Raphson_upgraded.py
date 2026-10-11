@@ -74,5 +74,3 @@ if __name__ == "__main__":
 
     os.makedirs(ruta_graficas, exist_ok=True)
     plt.savefig(ruta_guardado, dpi=300, bbox_inches='tight')
-
-    
