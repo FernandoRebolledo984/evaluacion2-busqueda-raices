@@ -1,5 +1,7 @@
 #Raíz doble f(x) = (x − 2)²
 import numpy as np
+import os
+import matplotlib.pyplot as plt
 
 
 def funcion_raiz_doble(x):
@@ -50,4 +52,5 @@ if __name__ == "__main__":
             print(f"Raíz aproximada: {raiz}")
             print(f"Iteraciones necesarias: {iters}")
             print(f"Error final: {lista_errores[-1]}")
+
     
