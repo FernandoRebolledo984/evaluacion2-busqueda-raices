@@ -77,3 +77,10 @@ ruta_guardado = os.path.join(ruta_graficas, 'grafica_secante.png')
 
 os.makedirs(ruta_graficas, exist_ok=True)
 plt.savefig(ruta_guardado, dpi=300, bbox_inches='tight')
+
+# ======================================== ARCHIVO CSV ========================================
+ruta_data = os.path.abspath(os.path.join(directorio_script, '..', 'data'))
+os.makedirs(ruta_data, exist_ok=True)
+ruta_csv = os.path.join(ruta_data, 'secante.csv')
+csv_datos = np.column_stack((X,Y))
+np.savetxt(ruta_csv, csv_datos, delimiter=',', header='x, f(x)', comments='', fmt='%.6f')

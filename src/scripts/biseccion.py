@@ -77,19 +77,19 @@ if __name__ == "__main__":
         print(f"Error final: {lista_errores[-1]}")
 
     # ======================================== GRAFICA ========================================
-    x_val = np.linspace(0.5, 2.5, 200)
-    y_val = polinomio(x_val)
+    X = np.linspace(0.5, 2.5, 200)
+    Y = polinomio(X)
         
     plt.figure(figsize=(8, 5))
-    plt.plot(x_val, y_val, label="f(x) = x³ - x - 2", color='aqua')
+    plt.plot(X, Y, label="f(x) = x³ - x - 2", color='aqua')
         
     plt.axhline(0, color='black', linewidth=1)
         
     plt.scatter([raiz], [0], color='red', zorder=5, label=f"Raíz = {raiz:.5f}")
         
     plt.title("Método Numérico - Bisección")
-    plt.xlabel("x")
-    plt.ylabel("y")
+    plt.xlabel("X")
+    plt.ylabel("Y")
     plt.grid(True, linestyle='--', alpha=0.7)
     plt.legend()
         
@@ -99,3 +99,10 @@ if __name__ == "__main__":
 
     os.makedirs(ruta_graficas, exist_ok=True)
     plt.savefig(ruta_guardado, dpi=300, bbox_inches='tight')
+
+    # ======================================== ARCHIVO CSV ========================================
+    ruta_data = os.path.abspath(os.path.join(directorio_script, '..', 'data'))
+    os.makedirs(ruta_data, exist_ok=True)
+    ruta_csv = os.path.join(ruta_data, 'biseccion.csv')
+    csv_datos = np.column_stack((X,Y))
+    np.savetxt(ruta_csv, csv_datos, delimiter=',', header='x, f(x)', comments='', fmt='%.6f')

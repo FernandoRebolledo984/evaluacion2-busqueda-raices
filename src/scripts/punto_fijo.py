@@ -61,11 +61,11 @@ raiz = punto_fijo(g, x0, tol, iteracion)
 print(f"La raíz aproximada es {raiz:.7f}\n")
 
 # ======================================== GRÁFICA ========================================
-x_val = np.linspace(-1, 2, 400)
-y_val = f(x_val)
+X = np.linspace(-1, 2, 400)
+Y = f(X)
 
 plt.figure(figsize=(8,5))
-plt.plot(x_val, y_val, label=r'$f(x) = \cos(x) - x$', color='aqua', linewidth=2)
+plt.plot(X, Y, label=r'$f(x) = \cos(x) - x$', color='aqua', linewidth=2)
 plt.axhline(0,color='black',linewidth=1,linestyle='--') #Eje X
 
 plt.plot(raiz,0,'ro',markersize=8,label=f'Raíz aprox: {raiz:.6f}') #Marcador de la raíz
@@ -84,3 +84,10 @@ ruta_guardado = os.path.join(ruta_graficas, 'grafica_punto_fijo.png')
 os.makedirs(ruta_graficas, exist_ok=True)
 
 plt.savefig(ruta_guardado, dpi=300, bbox_inches='tight')
+
+# ======================================== ARCHIVO CSV ========================================
+ruta_data = os.path.abspath(os.path.join(directorio_script, '..', 'data'))
+os.makedirs(ruta_data, exist_ok=True)
+ruta_csv = os.path.join(ruta_data, 'punto_fijo.csv')
+csv_datos = np.column_stack((X,Y))
+np.savetxt(ruta_csv, csv_datos, delimiter=',', header='x, f(x)', comments='', fmt='%.6f')

@@ -52,11 +52,11 @@ if __name__ == "__main__":
             print(f"Raíz aproximada: {raiz}")
             print(f"Iteraciones necesarias: {iters}")
             print(f"Error final: {lista_errores[-1]}")
-    x_vals = np.linspace(0.0, 4.0, 200)
-    y_vals = funcion_raiz_doble(x_vals)
+    X = np.linspace(0.0, 4.0, 200)
+    Y = funcion_raiz_doble(X)
         
     plt.figure(figsize=(8, 5))
-    plt.plot(x_vals, y_vals, label="f(x) = (x - 2)²", color='aqua')
+    plt.plot(X, Y, label="f(x) = (x - 2)²", color='aqua')
         
     plt.axhline(0, color='black', linewidth=1)
         
@@ -74,3 +74,10 @@ if __name__ == "__main__":
 
     os.makedirs(ruta_graficas, exist_ok=True)
     plt.savefig(ruta_guardado, dpi=300, bbox_inches='tight')
+
+    # ======================================== ARCHIVO CSV ========================================
+    ruta_data = os.path.abspath(os.path.join(directorio_script, '..', 'data'))
+    os.makedirs(ruta_data, exist_ok=True)
+    ruta_csv = os.path.join(ruta_data, 'Newthon_Raphson_mejorado.csv')
+    csv_datos = np.column_stack((X,Y))
+    np.savetxt(ruta_csv, csv_datos, delimiter=',', header='x, f(x)', comments='', fmt='%.6f')
