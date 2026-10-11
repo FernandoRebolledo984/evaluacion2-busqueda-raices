@@ -77,33 +77,23 @@ if __name__ == "__main__":
     x_vals = np.linspace(0.0, 1.5, 200)
     y_vals = funcion_mixta(x_vals)
         
-        # 2. Configurar el gráfico
     plt.figure(figsize=(8, 5))
     plt.plot(x_vals, y_vals, label="f(x) = √x - cos(x)", color='aqua')
         
-        # Dibujar la línea del eje X (y=0)
     plt.axhline(0, color='black', linewidth=1)
         
-        # Marcar la raíz encontrada con un punto rojo
+    #Marcar la raíz 
     plt.scatter([raiz], [0], color='red', zorder=5, label=f"Raíz = {raiz:.5f}")
         
-        # Títulos y estilo
-    plt.title("Método de Falsa Posición")
+    plt.title("Método Numérico - Falsa Posición")
     plt.xlabel("x")
     plt.ylabel("f(x)")
     plt.grid(True, linestyle='--', alpha=0.7)
     plt.legend()
         
-        # 3. Guardar el gráfico usando rutas relativas
     directorio_script = os.path.dirname(os.path.abspath(__file__))
     ruta_graficas = os.path.abspath(os.path.join(directorio_script, '..', 'assets'))
     ruta_guardado = os.path.join(ruta_graficas, 'grafica_falsa_posicion.png')
 
-        # En caso de que la ruta no exista
     os.makedirs(ruta_graficas, exist_ok=True)
-
     plt.savefig(ruta_guardado, dpi=300, bbox_inches='tight')
-    print(f"\nGráfico guardado exitosamente en:\n{ruta_guardado}")
-        
-        # Cerrar figura
-    plt.close()

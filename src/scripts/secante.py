@@ -62,22 +62,18 @@ plt.plot(X, Y, label='f(x) = ln(x) + x - 4', color='aqua', linewidth=2)
 
 plt.plot(raiz, f(raiz), 'ro', markersize=5, label=f'Raíz ≈ {raiz:.4f}') #Marcamos la raíz con un punto rojo
 
-#Líneas 'x' y 'y'
 plt.axhline(0, color='black', linewidth=1)
 plt.axvline(0, color='black', linewidth=1)
 
-plt.title('Métodos numéricos - Secante ')
+plt.title('Método numérico - Secante ')
 plt.xlabel('Eje x')
 plt.ylabel('Eje y')
 plt.grid(True, linestyle='--', alpha=0.7)
 plt.legend()
 
-#Guardamos en el directorio de assets
 directorio_script = os.path.dirname(os.path.abspath(__file__))
 ruta_graficas = os.path.abspath(os.path.join(directorio_script, '..', 'assets'))
 ruta_guardado = os.path.join(ruta_graficas, 'grafica_secante.png')
 
-#En caso de que la ruta no exista
 os.makedirs(ruta_graficas, exist_ok=True)
-
 plt.savefig(ruta_guardado, dpi=300, bbox_inches='tight')

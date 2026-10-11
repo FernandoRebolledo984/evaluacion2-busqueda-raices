@@ -75,37 +75,27 @@ if __name__ == "__main__":
         print(f"Raíz aproximada: {raiz}")
         print(f"Iteraciones necesarias: {iters}")
         print(f"Error final: {lista_errores[-1]}")
-    x_vals = np.linspace(0.5, 2.5, 200)
-    y_vals = polinomio(x_vals)
+
+    # ======================================== GRAFICA ========================================
+    x_val = np.linspace(0.5, 2.5, 200)
+    y_val = polinomio(x_val)
         
-        # 2. Configurar el gráfico
     plt.figure(figsize=(8, 5))
-    plt.plot(x_vals, y_vals, label="f(x) = x³ - x - 2", color='aqua')
+    plt.plot(x_val, y_val, label="f(x) = x³ - x - 2", color='aqua')
         
-        # Dibujar la línea del eje X (y=0)
     plt.axhline(0, color='black', linewidth=1)
         
-        # Marcar la raíz encontrada con un punto rojo
     plt.scatter([raiz], [0], color='red', zorder=5, label=f"Raíz = {raiz:.5f}")
         
-        # Títulos y estilo
-    plt.title("Método de Bisección")
+    plt.title("Método Numérico - Bisección")
     plt.xlabel("x")
     plt.ylabel("f(x)")
     plt.grid(True, linestyle='--', alpha=0.7)
     plt.legend()
         
-        # 3. Guardar el gráfico usando tus rutas relativas
-        # NOTA: __file__ funciona al correr el script directamente en la terminal.
     directorio_script = os.path.dirname(os.path.abspath(__file__))
     ruta_graficas = os.path.abspath(os.path.join(directorio_script, '..', 'assets'))
     ruta_guardado = os.path.join(ruta_graficas, 'grafica_biseccion.png')
 
-        # En caso de que la ruta no exista
     os.makedirs(ruta_graficas, exist_ok=True)
-
     plt.savefig(ruta_guardado, dpi=300, bbox_inches='tight')
-    print(f"\nGráfico guardado exitosamente en:\n{ruta_guardado}")
-        
-        # Cerrar figura para evitar que se acumulen en memoria si corres varios scripts
-    plt.close()
