@@ -91,7 +91,7 @@ if __name__ == "__main__":
         
     directorio_script = os.path.dirname(os.path.abspath(__file__))
     ruta_graficas = os.path.abspath(os.path.join(directorio_script, '..', 'assets'))
-    ruta_guardado = os.path.join(ruta_graficas, 'grafica_falsa_posicion.png')
+    ruta_guardado = os.path.join(ruta_graficas, 'convergencia_falsa_posicion.png')
 
     os.makedirs(ruta_graficas, exist_ok=True)
     plt.savefig(ruta_guardado, dpi=300, bbox_inches='tight')
@@ -107,3 +107,19 @@ if __name__ == "__main__":
     
     # Guardamos usando formato entero para la iteración (%d) y notación científica para el error (%.8e)
     np.savetxt(ruta_csv, csv_datos, delimiter=',', header='Iteracion,Error_Absoluto', comments='', fmt=['%d', '%.8e'])
+
+    # ======================================== GRAFICA 1: FUNCION CON SU RAIZ ========================================
+    x_vals = np.linspace(intervalo_a, intervalo_b, 200)
+    y_vals = funcion_mixta(x_vals)
+
+    plt.figure(figsize=(8, 5))
+    plt.plot(x_vals, y_vals, color='blue', linewidth=2, label='f(x) = √x - cos(x)')
+    plt.axhline(0, color='black', linewidth=1)  # eje x
+    plt.plot(raiz, funcion_mixta(raiz), 'ro', markersize=8, label=f'Raíz ≈ {raiz:.6f}')
+    plt.title("Función mixta con su raíz marcada", fontsize=14)
+    plt.xlabel("x", fontsize=12)
+    plt.ylabel("f(x)", fontsize=12)
+    plt.grid(True, alpha=0.4)
+    plt.legend()
+    plt.savefig(os.path.join(ruta_graficas, 'raiz_falsa_posicion.png'), dpi=300, bbox_inches='tight')
+    plt.close()

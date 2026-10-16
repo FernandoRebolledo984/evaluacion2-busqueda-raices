@@ -25,3 +25,11 @@ El informe.md debe cerrar con una conclusión argumentada que responda:
 -¿Qué ocurrió en la raíz doble y qué dice eso sobre «tener raíz» frente a «cambiar de signo»?
 -¿Cómo cambió el número de iteraciones al mover el intervalo o la estimación inicial?
 La conclusión debe apoyarse en los números y gráficos obtenidos, no en la intuición.
+
+RESPUESTAS:
+
+1.-Elección de métodos: Elegiríamos Bisección si necesitamos asegurar el resultado sí o sí (robustez). Secante es un buen punto medio para evitar calcular derivadas, y Newton es el elegido si buscamos velocidad pura y derivar es fácil.
+
+2.-Raíz doble y cambio de signo: La gráfica tocó el cero en el eje X pero rebotó. O sea, tiene raíz pero no cambia de signo. Esto demuestra por qué fallan los métodos de intervalo que obligan a cumplir la condición f(a) * f(b) < 0 y por qué tuvimos que usar Newton Mejorado.
+
+3.-Cambio de iteraciones: Mientras más lejos pusimos el intervalo o el punto inicial, más iteraciones tardó el código en alcanzar la tolerancia exigida. Elegir un punto cercano desde el principio ahorra muchos cálculos.

@@ -69,7 +69,7 @@ if __name__ == "__main__":
         
     directorio_script = os.path.dirname(os.path.abspath(__file__))
     ruta_graficas = os.path.abspath(os.path.join(directorio_script, '..', 'assets'))
-    ruta_guardado = os.path.join(ruta_graficas, 'grafica_newton_mejorado.png')
+    ruta_guardado = os.path.join(ruta_graficas, 'convergencia_newton_mejorado.png')
 
     os.makedirs(ruta_graficas, exist_ok=True)
     plt.savefig(ruta_guardado, dpi=300, bbox_inches='tight')
@@ -85,3 +85,22 @@ if __name__ == "__main__":
     
     # Guardamos usando formato entero para la iteración (%d) y notación científica para el error (%.8e)
     np.savetxt(ruta_csv, csv_datos, delimiter=',', header='Iteracion,Error_Absoluto', comments='', fmt=['%d', '%.8e'])
+   # ======================================== GRAFICA 1: FUNCION, RAIZ Y TANGENCIA ========================================
+    # SOLUCIÓN: Cambiamos las variables de intervalo inexistentes por valores fijos para centrar la parábola
+    x_vals = np.linspace(0.0, 4.0, 200)
+    y_vals = funcion_raiz_doble(x_vals)
+
+    plt.figure(figsize=(8, 5))
+    plt.plot(x_vals, y_vals, color='blue', linewidth=2, label='f(x) = (x - 2)²')
+    plt.axhline(0, color='black', linewidth=1)  # eje x
+    plt.plot(punto_inicial, funcion_raiz_doble(punto_inicial), 'g^', markersize=8, label=f'x₀ = {punto_inicial}')
+    plt.plot(raiz, funcion_raiz_doble(raiz), 'ro', markersize=8, label=f'Raíz doble ≈ {raiz:.6f}')
+    plt.annotate('Tangencia al eje x\n(sin cambio de signo)', xy=(raiz, 0), xytext=(1.55, 2.0),
+         arrowprops=dict(arrowstyle='->', color='red'), fontsize=10)
+    plt.title("Función con raíz doble: tangencia al eje x", fontsize=14)
+    plt.xlabel("x", fontsize=12)
+    plt.ylabel("f(x)", fontsize=12)
+    plt.grid(True, alpha=0.4)
+    plt.legend()
+    plt.savefig(os.path.join(ruta_graficas, 'raiz_nr_mejorado.png'), dpi=300, bbox_inches='tight')
+    plt.close()
