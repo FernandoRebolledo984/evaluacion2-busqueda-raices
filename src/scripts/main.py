@@ -17,7 +17,7 @@ if __name__ == "__main__":
     entorno["MPLBACKEND"] = "Agg"
     for nombre in SCRIPTS_INDIVIDUALES:
         ruta = os.path.join(DIR_SCRIPTS, nombre)
-        print(f"\n{'=' * 70}\n>>> Ejecutando {nombre}\n{'=' * 70}")
+        print(f"\n{'=' * 70}\n=== Ejecutando {nombre}\n{'=' * 70}")
         if not os.path.exists(ruta):
             print(f"  [!] No se encontró {nombre}, se omite.")
             continue
