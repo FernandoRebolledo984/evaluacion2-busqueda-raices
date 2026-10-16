@@ -42,6 +42,8 @@ def secante(f,x0,x1,tol,iteraciones):
 # ======================================== MAIN ========================================
 print("\n\nMétodo de la secante")
 #Estimación inicial dada por el profesor
+a = 2
+b = 3
 x_0 = 2
 x_1 = 3
 tol = 1e-6
@@ -50,30 +52,52 @@ iteraciones = 100
 raiz, errores = secante(f, x_0, x_1, tol, iteraciones)
 print(f"La raíz aproximada es {raiz:.6f}\n")
 
-# ======================================== SECCIÓN DE LA GRÁFICA ========================================
+# ======================================== RUTAS ========================================
+script_directory = os.path.dirname(os.path.abspath(__file__))
+ruta_graficas = os.path.abspath(os.path.join(script_directory, '..', 'assets'))
+ruta_data = os.path.abspath(os.path.join(script_directory, '..', 'data'))
+#por si acaso
+os.makedirs(ruta_graficas, exist_ok=True)
+os.makedirs(ruta_data, exist_ok=True)
+
+# ======================================== GRÁFICAS ========================================
+# === GRÁFICA 1 ===
+X = np.linspace(a, b, 200)
+Y = f(X)
+
+plt.figure(figsize=(8,5))
+plt.plot(X, Y, color='blue', linewidth=2, label='f(x) = ln(x) + x - 4')
+plt.axhline(0, color='black', linewidth=1)
+plt.plot(raiz, f(raiz), 'ro', markersize=8, label=f'Raíz ≈ {raiz:.6f}')
+
+plt.title('Función con su raíz marcada', fontsize=14)
+plt.xlabel('x', fontsize=12)
+plt.ylabel('f(x)', fontsize=12)
+plt.grid(True, alpha=0.4)
+plt.legend()
+
+plt.savefig(os.path.join(ruta_graficas, 'raiz_secante.png'), dpi=300, bbox_inches='tight')
+plt.close()
+
+# === GRÁFICA 2 ===
 iteraciones_x = np.arange(1, len(errores)+1)
 
 plt.figure(figsize=(8,6))
-plt.plot(iteraciones_x, errores, marker='o', color='blue', markeredgecolor='blue', linewidth=2, label='Error absoluto')
-plt.axhline(tol, color='red', linestyle='--', linewidth=1, label=f'Tolerancia')
+plt.plot(iteraciones_x, errores, marker='o', color='blue', markeredgecolor='blue', linewidth=2, label='Secante')
+plt.axhline(tol, color='red', linestyle='--', linewidth=1, label='Tolerancia')
+plt.yscale('log')
+plt.xticks(iteraciones_x) #Enteros
 
-plt.title('Convergencia del error - Método de la Secante ')
-plt.xlabel('Iteración')
-plt.ylabel('Error absoluto')
-plt.xticks(iteraciones_x)
-plt.grid(True, linestyle='--', alpha=0.7)
+plt.title('Convergencia del error - Método de la Secante', fontsize=14)
+plt.xlabel('Iteración', fontsize=12)
+plt.ylabel('Error absoluto (log)', fontsize=12)
+plt.grid(True, which='both', linestyle='--', alpha=0.7)
 plt.legend()
 
-directorio_script = os.path.dirname(os.path.abspath(__file__))
-ruta_graficas = os.path.abspath(os.path.join(directorio_script, '..', 'assets'))
-ruta_guardado = os.path.join(ruta_graficas, 'grafica_secante.png')
-
-os.makedirs(ruta_graficas, exist_ok=True)
-plt.savefig(ruta_guardado, dpi=300, bbox_inches='tight')
+plt.savefig(os.path.join(ruta_graficas, 'convergencia_secante.png'), dpi=300, bbox_inches='tight')
+plt.close()
 
 # ======================================== ARCHIVO CSV ========================================
-ruta_data = os.path.abspath(os.path.join(directorio_script, '..', 'data'))
-os.makedirs(ruta_data, exist_ok=True)
 ruta_csv = os.path.join(ruta_data, 'secante.csv')
-csv_datos = np.column_stack((iteraciones_x,errores))
-np.savetxt(ruta_csv, csv_datos, delimiter=',', header='iteracion, error_absoluto)', comments='', fmt=['%d', '%.8f'])
+csv_datos = np.column_stack((X,Y))
+np.savetxt(ruta_csv, csv_datos, delimiter=',', header='x, f(x)', comments='', fmt=['%d', '%.8f'])

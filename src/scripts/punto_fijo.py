@@ -47,7 +47,7 @@ tol = 1e-6
 iteracion = 100
 
 #Bolzano
-print(f"Comprobación bolzano: f(a)*f(b)<0 = {f(a):.6f} * {f(b):.6f} < 0\n")
+print(f"Comprobación bolzano: f(a)*f(b)<0 = {f(a):.6f} * {f(b):.6f} < 0")
 
 raiz, errores = punto_fijo(g, x0, tol, iteracion)
 
@@ -101,4 +101,4 @@ plt.savefig(os.path.join(ruta_graficas, 'convergencia_punto_fijo.png'), dpi=300,
 # ======================================== ARCHIVO CSV ========================================
 ruta_csv = os.path.join(ruta_data, 'punto_fijo.csv')
 csv_datos = np.column_stack((X,Y))
-np.savetxt(ruta_csv, csv_datos, delimiter=',', header='x, f(x)', comments='')
+np.savetxt(ruta_csv, csv_datos, delimiter=',', header='x, f(x)', comments='', fmt=['%d', '%.8f'])
